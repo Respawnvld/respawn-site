@@ -209,10 +209,13 @@
     .section-title span{color:var(--muted); font-size:13px}
 
     .features{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
+  display:grid;
+  grid-template-columns: repeat(2, 1fr); /* было 3, стало 2 */
+  gap:14px;
+}
+@media (max-width: 900px){
+  .features{ grid-template-columns:1fr; }
+}
     @media (max-width: 900px){ .features{grid-template-columns:1fr} }
     .feature{padding:16px}
     .feature b{display:block; margin-bottom:6px}
@@ -412,7 +415,7 @@
       <div class="card feature"><b>SIM Racing ×2</b><p>Симуляторы вождения для любителей скорости.</p></div>
       <div class="card feature"><b>24/7</b><p>Приходи в любое время — ночь и утро тоже игровые.</p></div>
     </div>
-  </section>
+  </section
 
   <section id="prices">
     <div class="section-title">
@@ -505,7 +508,13 @@
         Скажешь условия — красиво оформлю в карточки.
       </p>
     </div>
-  </section>
+  </section><div class="section-sep"></div>
+  .section-sep{
+  height: 1px;
+  background: rgba(45,168,255,.14);
+  margin: 34px 0;           /* делает “воздух” между секциями */
+  box-shadow: 0 0 30px rgba(45,168,255,.10);
+}
 
   <footer>
     <div class="divider"></div>
@@ -534,6 +543,7 @@
 </script>
 </body>
 </html>
+
 
 
 
