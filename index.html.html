@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Respawn — компьютерный клуб</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#0a0f1c;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+h1{
+color:#39b6ff;
+font-size:48px;
+}
+
+button{
+background:#39b6ff;
+border:none;
+padding:15px 25px;
+font-size:18px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1d8ed6;
+}
+
+.section{
+margin-top:60px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>RESPAWN</h1>
+<p>Компьютерный клуб во Владикавказе</p>
+
+<br>
+
+<button onclick="document.getElementById('prices').scrollIntoView({behavior:'smooth'})">
+Смотреть прайс
+</button>
+
+<div class="section" id="prices">
+
+<h2>Цены</h2>
+
+<p>Standard — от 150₽/час</p>
+<p>VIP — от 200₽/час</p>
+<p>PlayStation — 500₽/час</p>
+
+</div>
+
+</body>
+</html>
