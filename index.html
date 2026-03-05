@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Respawn — компьютерный клуб (Владикавказ)</title>
-  <meta name="description" content="Respawn — компьютерный клуб во Владикавказе. Круглосуточно: залы, PlayStation, стримерская, сим-рейсинг. Цены и контакты." />
+  <meta name="description" content="Respawn — компьютерный клуб во Владикавказе. Круглосуточно: Standard зал, 2 VIP зала, PlayStation, стримерская, 2 симулятора вождения. Цены, контакты и бронирование." />
 
   <style>
     :root{
@@ -15,7 +15,7 @@
       --neon:#2DA8FF;
       --neon2:#67D1FF;
       --line:rgba(45,168,255,.18);
-      --shadow: 0 0 0 1px var(--line), 0 18px 60px rgba(0,0,0,.55);
+      --shadow: 0 0 0 1px rgba(45,168,255,.14), 0 18px 60px rgba(0,0,0,.55);
       --radius: 18px;
     }
 
@@ -33,27 +33,53 @@
       overflow-x:hidden;
     }
 
-    /* Неоновый водяной знак логотипом (если есть assets/logo.png) */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:-140px;
-      z-index:-1;
-      pointer-events:none;
-      background:
-        radial-gradient(900px 520px at 20% 10%, rgba(45,168,255,.16), transparent 62%),
-        radial-gradient(900px 520px at 80% 30%, rgba(103,209,255,.10), transparent 66%),
-        url("assets/logo.png");
-      background-repeat:no-repeat;
-      background-size: auto, auto, 680px;
-      background-position: center, center, 75% 45%;
-      opacity:.10;
-      filter: drop-shadow(0 0 40px rgba(45,168,255,.30));
-    }
-
     a{color:inherit; text-decoration:none}
     .wrap{max-width:1100px; margin:0 auto; padding:24px}
 
+    /* ====== НЕОНОВЫЙ АНИМИРОВАННЫЙ ФОН ====== */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-200px;
+      z-index:-2;
+      pointer-events:none;
+      background:
+        radial-gradient(600px 420px at 10% 20%, rgba(45,168,255,.22), transparent 60%),
+        radial-gradient(520px 380px at 80% 30%, rgba(103,209,255,.14), transparent 62%),
+        radial-gradient(620px 420px at 50% 90%, rgba(45,168,255,.10), transparent 60%);
+      filter: blur(12px);
+      animation: neonFloat 12s ease-in-out infinite;
+      opacity:.9;
+    }
+    @keyframes neonFloat{
+      0%   { transform: translate3d(0,0,0) scale(1); }
+      50%  { transform: translate3d(-18px,12px,0) scale(1.04); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    .grid-overlay{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.18;
+      background:
+        linear-gradient(to right, rgba(45,168,255,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(45,168,255,.08) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(circle at 30% 20%, black 0%, transparent 62%);
+    }
+    .noise{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* ====== HEADER ====== */
     header{
       position:sticky; top:0; z-index:20;
       backdrop-filter: blur(10px);
@@ -65,7 +91,6 @@
       gap:14px; padding:14px 24px;
       max-width:1100px; margin:0 auto;
     }
-
     .brand{display:flex; align-items:center; gap:12px; min-width:200px}
     .logo{
       width:40px; height:40px; border-radius:14px;
@@ -94,6 +119,7 @@
       background: rgba(45,168,255,.06);
     }
 
+    /* ====== COMPONENTS ====== */
     .card{
       background: rgba(11,16,32,.75);
       border:1px solid rgba(45,168,255,.14);
@@ -101,17 +127,19 @@
       box-shadow: var(--shadow);
     }
 
-   .hero{ padding:42px 0 18px; }
+    .hero{padding:42px 0 18px}
+
+    /* ВАЖНО: сетка верхнего блока (чтобы ничего не "уезжало") */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:start;
+    }
     @media (max-width: 900px){
-      .grid{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap:18px;
-  align-items: start;
-}
-@media (max-width: 900px){
-  .grid{ grid-template-columns:1fr; }
-}
+      .grid{grid-template-columns:1fr}
+      nav{justify-content:flex-start}
+    }
 
     .hero-card{padding:26px}
     .kicker{
@@ -148,6 +176,7 @@
     }
 
     .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
@@ -156,9 +185,12 @@
       border:1px solid rgba(45,168,255,.20);
       background: rgba(45,168,255,.10);
       color: var(--text);
-      font-weight:800;
+      font-weight:900;
       transition: transform .08s ease, background .15s ease, border-color .15s ease;
       user-select:none;
+
+      position:relative;
+      overflow:hidden;
     }
     .btn:hover{background: rgba(45,168,255,.16); border-color: rgba(45,168,255,.35)}
     .btn:active{transform: translateY(1px)}
@@ -167,6 +199,19 @@
       border-color: rgba(45,168,255,.45);
       box-shadow: 0 0 28px rgba(45,168,255,.18);
     }
+
+    /* Glow-follow */
+    .btn::before{
+      content:"";
+      position:absolute;
+      inset:-60px;
+      background: radial-gradient(circle at var(--x) var(--y),
+          rgba(45,168,255,.45),
+          transparent 40%);
+      opacity:0;
+      transition: opacity .25s ease;
+    }
+    .btn:hover::before{ opacity:1; }
 
     .side{padding:18px}
     .side h3{margin:0 0 10px; font-size:16px}
@@ -179,7 +224,7 @@
     }
     .row{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
     .label{color:var(--muted); font-size:13px}
-    .value{font-weight:800}
+    .value{font-weight:900}
     .small{font-size:12px; color:var(--muted); line-height:1.5}
 
     .qr{
@@ -188,7 +233,9 @@
       border-radius: 14px;
       border:1px dashed rgba(45,168,255,.28);
       background: rgba(45,168,255,.06);
-      display:flex; gap:12px; align-items:center;
+      display:flex;
+      gap:12px;
+      align-items:center;
     }
     .qrbox{
       width:92px; height:92px; border-radius: 14px;
@@ -199,32 +246,37 @@
       font-weight:900;
       letter-spacing:.1em;
       flex: 0 0 auto;
-      overflow:hidden;
     }
-    .qrbox img{width:100%; height:100%; object-fit:cover; display:block}
 
     section{padding:14px 0}
     .section-title{
       display:flex; align-items:baseline; justify-content:space-between; gap:16px;
-      margin:22px 0 12px;
+      margin:34px 0 14px;
     }
     .section-title h2{margin:0; font-size:20px}
     .section-title span{color:var(--muted); font-size:13px}
 
+    /* ====== ZONES (шире) ====== */
     .features{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr); /* было 3, стало 2 */
-  gap:14px;
-}
-@media (max-width: 900px){
-  .features{ grid-template-columns:1fr; }
-}
-    @media (max-width: 900px){ .features{grid-template-columns:1fr} }
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .features{grid-template-columns:1fr}
+    }
     .feature{padding:16px}
     .feature b{display:block; margin-bottom:6px}
     .feature p{margin:0; color:var(--muted); font-size:14px; line-height:1.55}
 
-    /* Цены */
+    .section-sep{
+      height: 1px;
+      background: rgba(45,168,255,.14);
+      margin: 34px 0;
+      box-shadow: 0 0 30px rgba(45,168,255,.10);
+    }
+
+    /* ====== PRICES ====== */
     .price-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -277,23 +329,21 @@
       line-height:1.5;
     }
 
-    .price-image{ margin-top:12px; padding:16px; }
-    .price-image img{
-      width:100%;
-      height:auto;
-      border-radius: 14px;
-      border:1px solid rgba(45,168,255,.14);
-      margin-top:12px;
-      display:block;
+    /* ====== REVEAL ====== */
+    .reveal{
+      opacity:0;
+      transform: translateY(18px);
+      transition: opacity .65s ease, transform .65s ease;
+      will-change: transform, opacity;
     }
-
-    /* Появление карточек при прокрутке */
-    .reveal{ opacity:0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
-    .reveal.show{ opacity:1; transform: translateY(0); }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0);
+    }
 
     .divider{height:1px; background: rgba(45,168,255,.12); margin:22px 0}
 
-    /* Плавающая кнопка бронирования (мобильная) */
+    /* Mobile floating booking */
     .floating-book{
       position:fixed;
       left:16px; right:16px; bottom:14px;
@@ -320,246 +370,249 @@
 </head>
 
 <body>
-<header>
-  <div class="topbar">
-    <a class="brand" href="#top">
-      <div class="logo" title="Respawn">
-        <img src="assets/logo.jpg" alt="Respawn logo" onerror="this.style.display='none'; this.parentElement.textContent='R'; this.parentElement.style.color='var(--neon2)'; this.parentElement.style.fontWeight='900';">
-      </div>
-      <div>
-        <div class="name">Respawn</div>
-        <div class="meta">Владикавказ • Маркуса 2а • 24/7</div>
-      </div>
-    </a>
+  <div class="grid-overlay"></div>
+  <div class="noise"></div>
 
-    <nav>
-      <a href="#zones">Зоны</a>
-      <a href="#prices">Цены</a>
-      <a href="#bonus">Бонусы</a>
-      <a href="#contacts">Контакты</a>
-    </nav>
-  </div>
-</header>
+  <header>
+    <div class="topbar">
+      <a class="brand" href="#top">
+        <div class="logo" title="Respawn">
+          <img src="assets/logo.jpg" alt="Respawn logo" onerror="this.style.display='none'; this.parentElement.textContent='R'; this.parentElement.style.color='var(--neon2)'; this.parentElement.style.fontWeight='900';">
+        </div>
+        <div>
+          <div class="name">Respawn</div>
+          <div class="meta">Владикавказ • Маркуса 2а • 24/7</div>
+        </div>
+      </a>
 
-<main class="wrap" id="top">
- <section class="hero">
-  <div class="grid">
-    <div class="card hero-card">
-      ...
+      <nav>
+        <a href="#zones">Зоны</a>
+        <a href="#prices">Цены</a>
+        <a href="#bonus">Бонусы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
     </div>
+  </header>
 
-    <aside class="card side" id="contacts">
-      ...
-    </aside>
-  </div>
-</section>
-        <div class="kicker"><span class="dot"></span> компьютерный клуб • владикавказ</div>
-        <h1>Respawn</h1>
-        <p class="sub">
-          Respawn - премиальный комьютерный клуб во Владикавказе.
-          
-          36 мощных игровых ПК с топовыми видеокартами, VIP-зоны, Play Station, гоночные симуляторы, стримеркая комната.
-          Максимальный комфорт, высокое качество и лучшие условия для игры.
+  <main class="wrap" id="top">
+    <section class="hero">
+      <div class="grid">
+        <div class="card hero-card">
+          <div class="kicker"><span class="dot"></span> компьютерный клуб • владикавказ</div>
+          <h1>Respawn</h1>
+          <p class="sub">
+            Круглосуточный клуб для игры, турниров и комфортного отдыха.
+            Standard зал, 2 VIP зала, PlayStation, стримерская и 2 симулятора вождения.
+          </p>
+
+          <div class="pills">
+            <div class="pill">Круглосуточно</div>
+            <div class="pill">VIP-залы ×2</div>
+            <div class="pill">PlayStation зона</div>
+            <div class="pill">Стримерская</div>
+            <div class="pill">SIM Racing ×2</div>
+          </div>
+
+          <div class="cta">
+            <a class="btn primary" href="tel:+79618209040">Позвонить: 8-961-820-90-40</a>
+            <a class="btn" href="https://t.me/rspwn_prmd" target="_blank" rel="noreferrer">Telegram</a>
+            <a class="btn" href="https://langame.ru/club/799456644" target="_blank" rel="noreferrer">Бронировать место</a>
+            <a class="btn" href="#prices">Смотреть прайс</a>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="small">
+            <b style="color:var(--text)">Что у нас:</b>
+            Standard / VIP / PS / стримерская / сим-рейсинг. Бонусная система и быстрые записи.
+          </div>
+        </div>
+
+        <aside class="card side" id="contacts">
+          <h3>Контакты</h3>
+
+          <div class="meta-box">
+            <div class="row"><div class="label">Город</div><div class="value">Владикавказ</div></div>
+            <div class="row"><div class="label">Адрес</div><div class="value">ул. Маркуса 2а</div></div>
+            <div class="row"><div class="label">Режим</div><div class="value">Круглосуточно</div></div>
+            <div class="row"><div class="label">Телефон</div><div class="value"><a href="tel:+79618209040">8-961-820-90-40</a></div></div>
+            <div class="row"><div class="label">Telegram</div><div class="value"><a href="https://t.me/rspwn_prmd" target="_blank" rel="noreferrer">@rspwn_prmd</a></div></div>
+          </div>
+
+          <div style="margin-top:12px; display:grid; gap:10px;">
+            <a class="btn" href="yandexmaps://maps.yandex.ru/?text=Владикавказ%20Маркуса%202а">Открыть в Яндекс Картах</a>
+            <a class="btn" href="https://yandex.ru/maps/?text=Владикавказ%20Маркуса%202а" target="_blank" rel="noreferrer">Открыть карту</a>
+          </div>
+
+          <a class="qr" id="booking" href="https://langame.ru/club/799456644" target="_blank" rel="noreferrer">
+            <div class="qrbox">QR</div>
+            <div>
+              <div style="font-weight:900">Бронирование через приложение</div>
+              <div class="small">Нажми — откроется Langame (можно сразу бронировать).</div>
+            </div>
+          </a>
+
+          <div class="small" style="margin-top:10px;">
+            Если позже появится QR-картинка — можно вставить вместо «QR».
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="zones">
+      <div class="section-title">
+        <h2>Зоны и возможности</h2>
+        <span>кратко и по делу</span>
+      </div>
+
+      <div class="features">
+        <div class="card feature"><b>Standard зал</b><p>Основная игровая зона — удобно для каток с друзьями.</p></div>
+        <div class="card feature"><b>VIP залы ×2</b><p>Отдельные комнаты для компаний и максимального комфорта.</p></div>
+        <div class="card feature"><b>PlayStation зона</b><p>Чилл на геймпадах: файтинги, спорт и кооп.</p></div>
+        <div class="card feature"><b>Стримерская</b><p>Можно записывать контент и стримить без лишнего шума.</p></div>
+        <div class="card feature"><b>SIM Racing ×2</b><p>Симуляторы вождения для любителей скорости.</p></div>
+        <div class="card feature"><b>24/7</b><p>Приходи в любое время — ночь и утро тоже игровые.</p></div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <section id="prices">
+      <div class="section-title">
+        <h2>Цены</h2>
+        <span>пакеты и почасовая оплата</span>
+      </div>
+
+      <div class="price-grid">
+        <div class="card price-card">
+          <div class="price-head">VICE CITY</div>
+          <div class="price-row"><span>3 часа</span><b>550₽</b></div>
+          <div class="price-row"><span>5 часов</span><b>950₽</b></div>
+          <div class="price-row"><span>8 часов</span><b>1500₽</b></div>
+          <div class="price-row onehour"><span>1 час</span><b>200₽</b></div>
+          <div class="price-note">2K • 360Гц • 27" OLED • 5070Ti</div>
+        </div>
+
+        <div class="card price-card">
+          <div class="price-head">STANDARD</div>
+          <div class="price-row"><span>3 часа</span><b>400₽</b></div>
+          <div class="price-row"><span>5 часов</span><b>700₽</b></div>
+          <div class="price-row"><span>8 часов</span><b>1100₽</b></div>
+          <div class="price-row"><span>Ночь (00:00–8:00)</span><b>700₽</b></div>
+          <div class="price-row"><span>Утро (8:00–14:00)</span><b>500₽</b></div>
+          <div class="price-row onehour"><span>1 час</span><b>150₽</b></div>
+          <div class="price-note">2K • 320Гц • 27" • 5070</div>
+        </div>
+
+        <div class="card price-card">
+          <div class="price-head">VALVE ZONE</div>
+          <div class="price-row"><span>3 часа</span><b>400₽</b></div>
+          <div class="price-row"><span>5 часов</span><b>700₽</b></div>
+          <div class="price-row"><span>8 часов</span><b>1150₽</b></div>
+          <div class="price-row"><span>Ночь (00:00–8:00)</span><b>700₽</b></div>
+          <div class="price-row"><span>Утро (8:00–14:00)</span><b>500₽</b></div>
+          <div class="price-row onehour"><span>1 час</span><b>150₽</b></div>
+          <div class="price-note">24.5" • 400Гц • Full HD • 5070</div>
+        </div>
+
+        <div class="card price-card">
+          <div class="price-head">COD ZONE</div>
+          <div class="price-row"><span>3 часа</span><b>500₽</b></div>
+          <div class="price-row"><span>5 часов</span><b>850₽</b></div>
+          <div class="price-row"><span>8 часов</span><b>1300₽</b></div>
+          <div class="price-row"><span>Ночь (00:00–8:00)</span><b>900₽</b></div>
+          <div class="price-row"><span>Утро (8:00–14:00)</span><b>600₽</b></div>
+          <div class="price-row onehour"><span>1 час</span><b>180₽</b></div>
+          <div class="price-note">2K • 360Гц • 27" OLED • 5070Ti</div>
+        </div>
+
+        <div class="card price-card">
+          <div class="price-head">STREAM ZONE</div>
+          <div class="price-row"><span>3 часа</span><b>1400₽</b></div>
+          <div class="price-row"><span>5 часов</span><b>2350₽</b></div>
+          <div class="price-row"><span>8 часов</span><b>3600₽</b></div>
+          <div class="price-row"><span>12 часов</span><b>5500₽</b></div>
+          <div class="price-row onehour"><span>1 час</span><b>600₽</b></div>
+          <div class="price-note">500Гц • 2K OLED • 5080</div>
+        </div>
+
+        <div class="card price-card">
+          <div class="price-head">SIM RACING</div>
+          <div class="price-row"><span>Standard Mode</span><b>1200₽</b></div>
+          <div class="price-row"><span>DUO Standard (3h)</span><b>4000₽</b></div>
+          <div class="price-row"><span>VR</span><b>1500₽</b></div>
+          <div class="price-row"><span>DUO VR (3h)</span><b>5000₽</b></div>
+          <div class="price-note">Правила использования уточняйте у администратора.</div>
+        </div>
+
+        <div class="card price-card">
+          <div class="price-head">PS ZONE</div>
+          <div class="price-row onehour"><span>1 час</span><b>500₽</b></div>
+          <div class="price-note">PlayStation 5 Pro</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bonus">
+      <div class="section-title">
+        <h2>Бонусная система</h2>
+        <span>можно добавить условия позже</span>
+      </div>
+
+      <div class="card" style="padding:16px">
+        <p style="margin:0; color:var(--muted); line-height:1.65">
+          Здесь можно разместить: накопление баллов, уровни, скидки, акции и как ими пользоваться.
+          Скажешь условия — красиво оформлю в карточки.
         </p>
-
-        <div class="pills">
-          <div class="pill">Standart zone</div>
-          <div class="pill">Valve zone</div>
-          <div class="pill">COD zone</div>
-          <div class="pill">Vice city</div>
-          <div class="pill">PlayStation</div>
-          <div class="pill">Stream zone</div>
-          <div class="pill">SIM Racing</div>
-        </div>
-
-        <div class="cta">
-          <a class="btn primary" href="tel:+79618209040">Позвонить: 8-961-820-90-40</a>
-          <a class="btn" href="https://t.me/rspwn_prmd" target="_blank" rel="noreferrer">Telegram</a>
-          <a class="btn" href="https://langame.ru/club/799456644" target="_blank">
-Бронировать место
-</a>
-          <a class="btn" href="#prices">Смотреть прайс</a>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="small">
       </div>
+    </section>
 
-      <aside class="card side" id="contacts">
-        <h3>Контакты</h3>
-
-        <div class="meta-box">
-          <div class="row"><div class="label">Город</div><div class="value">Владикавказ</div></div>
-          <div class="row"><div class="label">Адрес</div><div class="value">ул.Маркуса 2а</div></div>
-          <div class="row"><div class="label">Режим</div><div class="value">Круглосуточно</div></div>
-          <div class="row"><div class="label">Телефон</div><div class="value"><a href="tel:+79618209040">8-961-820-90-40</a></div></div>
-          <div class="row"><div class="label">Instagram</div><div class="value"><a href=https://www.instagram.com/respawn_prmd target="_blank" rel="noreferrer">@rspwn_prmd</a></div></div>
-          <a class="btn" href="https://yandex.ru/maps/?text=%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BA%D0%B0%D0%B2%D0%BA%D0%B0%D0%B7%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9C%D0%B0%D1%80%D0%BA%D1%83%D1%81%D0%B0%2C%202%D0%B0" target="_blank" rel="noreferrer">
-  Открыть в Яндекс Картах
-            <div class="row"><div class="label">Адрес</div><div class="value">Маркуса 2а</div></div>
-        </div>
-        
-          </div>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <section id="zones">
-    <div class="section-title">
-      <h2>Зоны и возможности</h2>
-      <span>кратко и по делу</span>
-    </div>
-
-    <div class="features">
-      <div class="card feature"><b>Standard зал</b><p>Основная игровая зона — удобно для каток с друзьями.</p></div>
-      <div class="card feature"><b>VIP залы ×2</b><p>Отдельные комнаты для компаний и максимального комфорта.</p></div>
-      <div class="card feature"><b>PlayStation зона</b><p>Чилл на геймпадах: файтинги, спорт и кооп.</p></div>
-      <div class="card feature"><b>Стримерская</b><p>Можно записывать контент и стримить без лишнего шума.</p></div>
-      <div class="card feature"><b>SIM Racing ×2</b><p>Симуляторы вождения для любителей скорости.</p></div>
-      <div class="card feature"><b>24/7</b><p>Приходи в любое время — ночь и утро тоже игровые.</p></div>
-    </div>
-  </section
-
-  <section id="prices">
-    <div class="section-title">
-      <h2>Цены</h2>
-      <span>пакеты и почасовая оплата</span>
-    </div>
-
-    <div class="price-grid">
-      <div class="card price-card">
-        <div class="price-head">VICE CITY</div>
-        <div class="price-row"><span>3 часа</span><b>550₽</b></div>
-        <div class="price-row"><span>5 часов</span><b>950₽</b></div>
-        <div class="price-row"><span>8 часов</span><b>1500₽</b></div>
-        <div class="price-row onehour"><span>1 час</span><b>200₽</b></div>
-        <div class="price-note">2K • 360Гц • 27" OLED • 5070Ti</div>
+    <footer>
+      <div class="divider"></div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between; align-items:center">
+        <div>© <span id="y"></span> Respawn • Владикавказ</div>
+        <div><a href="#top" style="color:var(--neon2); font-weight:900">Наверх ↑</a></div>
       </div>
+    </footer>
+  </main>
 
-      <div class="card price-card">
-        <div class="price-head">STANDARD</div>
-        <div class="price-row"><span>3 часа</span><b>400₽</b></div>
-        <div class="price-row"><span>5 часов</span><b>700₽</b></div>
-        <div class="price-row"><span>8 часов</span><b>1100₽</b></div>
-        <div class="price-row"><span>Ночь (00:00–8:00)</span><b>700₽</b></div>
-        <div class="price-row"><span>Утро (8:00–14:00)</span><b>500₽</b></div>
-        <div class="price-row onehour"><span>1 час</span><b>150₽</b></div>
-        <div class="price-note">2K • 320Гц • 27" • 5070</div>
-      </div>
+  <a class="floating-book" href="https://langame.ru/club/799456644" target="_blank" rel="noreferrer">Забронировать ПК</a>
 
-      <div class="card price-card">
-        <div class="price-head">VALVE ZONE</div>
-        <div class="price-row"><span>3 часа</span><b>400₽</b></div>
-        <div class="price-row"><span>5 часов</span><b>700₽</b></div>
-        <div class="price-row"><span>8 часов</span><b>1150₽</b></div>
-        <div class="price-row"><span>Ночь (00:00–8:00)</span><b>700₽</b></div>
-        <div class="price-row"><span>Утро (8:00–14:00)</span><b>500₽</b></div>
-        <div class="price-row onehour"><span>1 час</span><b>150₽</b></div>
-        <div class="price-note">24.5" • 400Гц • Full HD • 5070</div>
-      </div>
+  <script>
+    // Год в подвале
+    const y = document.getElementById("y");
+    if (y) y.textContent = new Date().getFullYear();
 
-      <div class="card price-card">
-        <div class="price-head">COD ZONE</div>
-        <div class="price-row"><span>3 часа</span><b>500₽</b></div>
-        <div class="price-row"><span>5 часов</span><b>850₽</b></div>
-        <div class="price-row"><span>8 часов</span><b>1300₽</b></div>
-        <div class="price-row"><span>Ночь (00:00–8:00)</span><b>900₽</b></div>
-        <div class="price-row"><span>Утро (8:00–14:00)</span><b>600₽</b></div>
-        <div class="price-row onehour"><span>1 час</span><b>180₽</b></div>
-        <div class="price-note">2K • 360Гц • 27" OLED • 5070Ti</div>
-      </div>
+    // Glow-follow эффект на кнопках
+    document.querySelectorAll(".btn").forEach(btn => {
+      btn.addEventListener("mousemove", e => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        btn.style.setProperty("--x", x + "px");
+        btn.style.setProperty("--y", y + "px");
+      });
+    });
 
-      <div class="card price-card">
-        <div class="price-head">STREAM ZONE</div>
-        <div class="price-row"><span>3 часа</span><b>1400₽</b></div>
-        <div class="price-row"><span>5 часов</span><b>2350₽</b></div>
-        <div class="price-row"><span>8 часов</span><b>3600₽</b></div>
-        <div class="price-row"><span>12 часов</span><b>5500₽</b></div>
-        <div class="price-row onehour"><span>1 час</span><b>600₽</b></div>
-        <div class="price-note">500Гц • 2K OLED • 5080</div>
-      </div>
+    // Появление блоков при прокрутке
+    const revealSelectors = [
+      ".hero-card",
+      ".side",
+      ".feature",
+      ".price-card",
+      "#bonus .card",
+      "footer"
+    ];
+    const revealEls = document.querySelectorAll(revealSelectors.join(","));
+    revealEls.forEach(el => el.classList.add("reveal"));
 
-      <div class="card price-card">
-        <div class="price-head">SIM RACING</div>
-        <div class="price-row"><span>Standard Mode</span><b>1200₽</b></div>
-        <div class="price-row"><span>DUO Standard (3h)</span><b>4000₽</b></div>
-        <div class="price-row"><span>VR</span><b>1500₽</b></div>
-        <div class="price-row"><span>DUO VR (3h)</span><b>5000₽</b></div>
-        <div class="price-note">Правила использования уточняйте у администратора.</div>
-      </div>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("show");
+      });
+    }, { threshold: 0.12 });
 
-      <div class="card price-card">
-        <div class="price-head">PS ZONE</div>
-        <div class="price-row onehour"><span>1 час</span><b>500₽</b></div>
-        <div class="price-note">PlayStation 5 Pro</div>
-      </div>
-    </div>
-      <div class="small" style="margin-top:10px;">
-        Если у тебя прайс в JPG — переименуй в <b>price.png</b> или замени в коде <b>price.png</b> на <b>price.jpg</b>.
-      </div>
-    </div>
-  </section>
-
-  <section id="bonus">
-    <div class="section-title">
-      <h2>Бонусная система</h2>
-      <span>позже добавим условия/картинку</span>
-    </div>
-    <div class="card" style="padding:16px">
-      <p style="margin:0; color:var(--muted); line-height:1.65">
-        Здесь можно разместить: накопление баллов, уровни, скидки, акции и как ими пользоваться.
-        Скажешь условия — красиво оформлю в карточки.
-      </p>
-    </div>
-  </section><div class="section-sep"></div>
-  .section-sep{
-  height: 1px;
-  background: rgba(45,168,255,.14);
-  margin: 34px 0;           /* делает “воздух” между секциями */
-  box-shadow: 0 0 30px rgba(45,168,255,.10);
-}
-
-  <footer>
-    <div class="divider"></div>
-    <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:space-between; align-items:center">
-      <div>© <span id="y"></span> Respawn • Владикавказ</div>
-      <div><a href="#top" style="color:var(--neon2); font-weight:800">Наверх ↑</a></div>
-    </div>
-  </footer>
-</main>
-
-<!-- Плавающая кнопка (мобильная) -->
-<a class="floating-book" href="#booking" aria-label="Забронировать ПК">Забронировать ПК</a>
-
-<script>
-  document.getElementById("y").textContent = new Date().getFullYear();
-
-  // Появление карточек цен при прокрутке
-  const items = document.querySelectorAll(".price-card");
-  items.forEach(el => el.classList.add("reveal"));
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("show"); });
-  }, { threshold: 0.12 });
-
-  items.forEach(el => io.observe(el));
-</script>
+    revealEls.forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
