@@ -310,9 +310,73 @@
     .floating-book:active{ transform: translateY(1px); }
 
     footer{padding:24px 0 40px; color: var(--muted); font-size:13px;}
+    .photo-gallery{
+margin-top:20px;
+}
+
+.photo-gallery h3{
+margin-bottom:10px;
+font-size:16px;
+color:#9fd3ff;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.gallery-grid img{
+width:100%;
+height:90px;
+object-fit:cover;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+border:1px solid rgba(0,150,255,0.3);
+}
+
+.gallery-grid img:hover{
+transform:scale(1.05);
+box-shadow:0 0 10px #00aaff;
+}
+
+.modal-photo{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.modal-photo img{
+max-width:85%;
+max-height:85%;
+border-radius:10px;
+}
   </style>
 </head>
+<div id="photoModal" class="modal-photo" onclick="closePhoto()">
+<img id="modalImg">
+</div>
 
+<script>
+
+function openPhoto(img){
+document.getElementById("photoModal").style.display="flex"
+document.getElementById("modalImg").src=img.src
+}
+
+function closePhoto(){
+document.getElementById("photoModal").style.display="none"
+}
+
+</script>
 <body>
 <header>
   <div class="topbar">
@@ -385,10 +449,19 @@
 </a>
         </div>
 
-        <div class="photos">
-  <img src="assets/photo1.jpg" alt="Respawn клуб">
-  <img src="assets/photo2.jpg" alt="Игровая зона">
-  <img src="assets/photo3.jpg" alt="VIP зона">
+        <div class="photo-gallery">
+
+<h3>📸 Наш клуб</h3>
+
+<div class="gallery-grid">
+
+<img src="assets/club1.jpg" onclick="openPhoto(this)">
+<img src="assets/club2.jpg" onclick="openPhoto(this)">
+<img src="assets/club3.jpg" onclick="openPhoto(this)">
+<img src="assets/club4.jpg" onclick="openPhoto(this)">
+
+</div>
+
 </div>
           <div>
             <div style="font-weight:900">Бронирование через приложение</div>
@@ -532,6 +605,7 @@
 </script>
 </body>
 </html>
+
 
 
 
