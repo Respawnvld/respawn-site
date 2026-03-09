@@ -33,7 +33,7 @@
       overflow-x:hidden;
     }
 
-    /* Неоновый водяной знак логотипом (assets/logo.png) */
+    /* Неоновый водяной знак логотипом (если есть assets/logo.png) */
     body::before{
       content:"";
       position:fixed;
@@ -224,16 +224,19 @@ background:rgba(10,20,40,0.6);
 border-radius:14px;
 border:1px solid rgba(0,150,255,0.2);
 }
+
 .bonus-system h2{
 margin-bottom:20px;
 font-size:22px;
 color:#9fd3ff;
 }
+
 .bonus-list{
 display:flex;
 flex-direction:column;
 gap:12px;
 }
+
 .bonus-item{
 display:flex;
 justify-content:space-between;
@@ -247,7 +250,7 @@ border:1px solid rgba(0,150,255,0.15);
 color:#00c8ff;
 font-weight:bold;
 }
-  
+
     /* Цены */
     .price-grid{
       display:grid;
@@ -412,9 +415,7 @@ document.getElementById("photoModal").style.display="none"
   <div class="topbar">
     <a class="brand" href="#top">
       <div class="logo" title="Respawn">
-        <img src="assets/logo.png" alt="Respawn">
-  <span>Respawn</span>
-</div>
+        <img src="assets/logo.png" alt="Respawn logo" onerror="this.style.display='none'; this.parentElement.textContent='R'; this.parentElement.style.color='var(--neon2)'; this.parentElement.style.fontWeight='900';">
       </div>
       <div>
         <div class="name">Respawn</div>
@@ -590,13 +591,19 @@ document.getElementById("photoModal").style.display="none"
       </div>
     </div>
 
+    
+
   <section id="bonus">
     <div class="section-title">
       <h2>Бонусная система</h2>
       <span>система бонусов при пополнении аккаунта</span>
     </div>
     <div class="bonus-system">
+
+
+
 <div class="bonus-list">
+
 <div class="bonus-item">
 Пополнение от <b>500 до 999 ₽</b>
 <span>+50 бонусов</span>
@@ -625,6 +632,7 @@ document.getElementById("photoModal").style.display="none"
 </div>
 
 
+   
     </div>
   </section>
 
