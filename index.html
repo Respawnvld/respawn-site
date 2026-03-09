@@ -250,6 +250,23 @@ border:1px solid rgba(0,150,255,0.15);
 color:#00c8ff;
 font-weight:bold;
 }
+   .site-logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.site-logo img{
+height:40px;
+width:auto;
+filter: drop-shadow(0 0 6px #00eaff);
+}
+
+.site-logo span{
+font-size:20px;
+font-weight:600;
+letter-spacing:1px;
+}
 
     /* Цены */
     .price-grid{
@@ -415,7 +432,9 @@ document.getElementById("photoModal").style.display="none"
   <div class="topbar">
     <a class="brand" href="#top">
       <div class="logo" title="Respawn">
-        <img src="assets/logo.png" alt="Respawn logo" onerror="this.style.display='none'; this.parentElement.textContent='R'; this.parentElement.style.color='var(--neon2)'; this.parentElement.style.fontWeight='900';">
+        <img src="assets/logo.png" alt="Respawn">
+  <span>Respawn</span>
+</div>
       </div>
       <div>
         <div class="name">Respawn</div>
@@ -591,8 +610,6 @@ document.getElementById("photoModal").style.display="none"
       </div>
     </div>
 
-    
-
   <section id="bonus">
     <div class="section-title">
       <h2>Бонусная система</h2>
@@ -600,7 +617,6 @@ document.getElementById("photoModal").style.display="none"
     </div>
     <div class="bonus-system">
 <div class="bonus-list">
-
 <div class="bonus-item">
 Пополнение от <b>500 до 999 ₽</b>
 <span>+50 бонусов</span>
@@ -660,6 +676,7 @@ document.getElementById("photoModal").style.display="none"
 </script>
 </body>
 </html>
+
 
 
 
