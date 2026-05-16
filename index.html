@@ -741,6 +741,9 @@ max-width:85%;
 max-height:85%;
 border-radius:10px;
 }
+    .hidden-gallery-photo{
+  display:none !important;
+}
   </style>
 </head>
 <div id="photoModal" class="modal-photo" onclick="closePhoto()">
@@ -868,25 +871,25 @@ document.addEventListener("keydown", function(e){
 </a>
         </div>
 
-        <div class="photo-gallery">
+       <div class="photo-gallery">
 
 <h3>Обзор</h3>
 
 <div class="gallery-grid">
 
-<img src="assets/club1.png" onclick="openPhoto(this)">
-<img src="assets/club2.png" onclick="openPhoto(this)">
-<img src="assets/club3.png" onclick="openPhoto(this)">
-<img src="assets/club4.png" onclick="openPhoto(this)">
-<img src="assets/club5.png" onclick="openPhoto(this)">
-<img src="assets/club6.png" onclick="openPhoto(this)">
-<img src="assets/club7.png" onclick="openPhoto(this)">
-<img src="assets/club8.png" onclick="openPhoto(this)">
-<img src="assets/club9.png" onclick="openPhoto(this)">
-<img src="assets/club10.png" onclick="openPhoto(this)">
-<img src="assets/club11.png" onclick="openPhoto(this)">
-<img src="assets/club12.png" onclick="openPhoto(this)">
-<img src="assets/club13.png" onclick="openPhoto(this)">
+<img src="assets/club1.jpg" onclick="openPhoto(this)">
+<img src="assets/club2.jpg" onclick="openPhoto(this)">
+<img src="assets/club3.jpg" onclick="openPhoto(this)">
+<img src="assets/club4.jpg" onclick="openPhoto(this)">
+
+<img class="hidden-gallery-photo" src="assets/club5.jpg" onclick="openPhoto(this)">
+<img class="hidden-gallery-photo" src="assets/club6.jpg" onclick="openPhoto(this)">
+<img class="hidden-gallery-photo" src="assets/club7.jpg" onclick="openPhoto(this)">
+<img class="hidden-gallery-photo" src="assets/club8.jpg" onclick="openPhoto(this)">
+<img class="hidden-gallery-photo" src="assets/club9.jpg" onclick="openPhoto(this)">
+<img class="hidden-gallery-photo" src="assets/club10.jpg" onclick="openPhoto(this)">
+<img class="hidden-gallery-photo" src="assets/club11.jpg" onclick="openPhoto(this)">
+<img class="hidden-gallery-photo" src="assets/club12.jpg" onclick="openPhoto(this)">
 
 </div>
 
