@@ -754,27 +754,15 @@ border-radius:10px;
 </div>
 
 <script>
-const galleryPhotos = [
-  "assets/club1.jpg",
-  "assets/club2.jpg",
-  "assets/club3.jpg",
-  "assets/club4.jpg",
-  "assets/club5.jpg",
-  "assets/club6.jpg",
-  "assets/club7.jpg",
-  "assets/club8.jpg",
-  "assets/club9.jpg",
-  "assets/club10.jpg",
-  "assets/club11.jpg",
-  "assets/club12.jpg"
-];
-
 let currentPhotoIndex = 0;
+let galleryPhotos = [];
 
-function openPhoto(index){
-  currentPhotoIndex = index;
+function openPhoto(img){
+  galleryPhotos = Array.from(document.querySelectorAll(".gallery-grid img"));
+  currentPhotoIndex = galleryPhotos.indexOf(img);
+
   document.getElementById("photoModal").style.display = "flex";
-  document.getElementById("modalImg").src = galleryPhotos[currentPhotoIndex];
+  document.getElementById("modalImg").src = img.src;
 }
 
 function closePhoto(){
@@ -790,7 +778,7 @@ function showPhoto(index){
     currentPhotoIndex = index;
   }
 
-  document.getElementById("modalImg").src = galleryPhotos[currentPhotoIndex];
+  document.getElementById("modalImg").src = galleryPhotos[currentPhotoIndex].src;
 }
 
 function prevPhoto(){
@@ -886,10 +874,19 @@ document.addEventListener("keydown", function(e){
 
 <div class="gallery-grid">
 
-<img src="assets/club1.jpg" onclick="openPhoto(0)">
-<img src="assets/club2.jpg" onclick="openPhoto(1)">
-<img src="assets/club3.jpg" onclick="openPhoto(2)">
-<img src="assets/club4.jpg" onclick="openPhoto(3)">
+<img src="assets/club1.png" onclick="openPhoto(this)">
+<img src="assets/club2.png" onclick="openPhoto(this)">
+<img src="assets/club3.png" onclick="openPhoto(this)">
+<img src="assets/club4.png" onclick="openPhoto(this)">
+<img src="assets/club5.png" onclick="openPhoto(this)">
+<img src="assets/club6.png" onclick="openPhoto(this)">
+<img src="assets/club7.png" onclick="openPhoto(this)">
+<img src="assets/club8.png" onclick="openPhoto(this)">
+<img src="assets/club9.png" onclick="openPhoto(this)">
+<img src="assets/club10.png" onclick="openPhoto(this)">
+<img src="assets/club11.png" onclick="openPhoto(this)">
+<img src="assets/club12.png" onclick="openPhoto(this)">
+<img src="assets/club13.png" onclick="openPhoto(this)">
 
 </div>
 
