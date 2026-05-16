@@ -754,15 +754,27 @@ border-radius:10px;
 </div>
 
 <script>
+const galleryPhotos = [
+  "assets/club1.jpg",
+  "assets/club2.jpg",
+  "assets/club3.jpg",
+  "assets/club4.jpg",
+  "assets/club5.jpg",
+  "assets/club6.jpg",
+  "assets/club7.jpg",
+  "assets/club8.jpg",
+  "assets/club9.jpg",
+  "assets/club10.jpg",
+  "assets/club11.jpg",
+  "assets/club12.jpg"
+];
+
 let currentPhotoIndex = 0;
-let galleryPhotos = [];
 
-function openPhoto(img){
-  galleryPhotos = Array.from(document.querySelectorAll(".gallery-grid img"));
-  currentPhotoIndex = galleryPhotos.indexOf(img);
-
+function openPhoto(index){
+  currentPhotoIndex = index;
   document.getElementById("photoModal").style.display = "flex";
-  document.getElementById("modalImg").src = img.src;
+  document.getElementById("modalImg").src = galleryPhotos[currentPhotoIndex];
 }
 
 function closePhoto(){
@@ -778,7 +790,7 @@ function showPhoto(index){
     currentPhotoIndex = index;
   }
 
-  document.getElementById("modalImg").src = galleryPhotos[currentPhotoIndex].src;
+  document.getElementById("modalImg").src = galleryPhotos[currentPhotoIndex];
 }
 
 function prevPhoto(){
