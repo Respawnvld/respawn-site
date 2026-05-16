@@ -667,7 +667,75 @@ justify-content:center;
 align-items:center;
 z-index:999;
 }
+.modal-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  border:1px solid rgba(45,168,255,.35);
+  background:rgba(7,10,18,.75);
+  color:#EAF2FF;
+  font-size:42px;
+  line-height:1;
+  cursor:pointer;
+  z-index:1000;
+  box-shadow:0 0 20px rgba(45,168,255,.25);
+}
 
+.modal-arrow:hover{
+  background:rgba(45,168,255,.20);
+}
+
+.modal-prev{
+  left:30px;
+}
+
+.modal-next{
+  right:30px;
+}
+
+.modal-close{
+  position:absolute;
+  top:24px;
+  right:30px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:1px solid rgba(45,168,255,.35);
+  background:rgba(7,10,18,.75);
+  color:#EAF2FF;
+  font-size:32px;
+  line-height:1;
+  cursor:pointer;
+  z-index:1001;
+}
+
+.modal-close:hover{
+  background:rgba(45,168,255,.20);
+}
+
+@media (max-width:768px){
+  .modal-arrow{
+    width:42px;
+    height:42px;
+    font-size:32px;
+  }
+
+  .modal-prev{
+    left:12px;
+  }
+
+  .modal-next{
+    right:12px;
+  }
+
+  .modal-close{
+    top:16px;
+    right:16px;
+  }
+}
 .modal-photo img{
 max-width:85%;
 max-height:85%;
