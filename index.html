@@ -741,9 +741,6 @@ max-width:85%;
 max-height:85%;
 border-radius:10px;
 }
-    .hidden-gallery-photo{
-  display:none !important;
-}
   </style>
 </head>
 <div id="photoModal" class="modal-photo" onclick="closePhoto()">
@@ -757,8 +754,8 @@ border-radius:10px;
 </div>
 
 <script>
-let galleryPhotos = [];
 let currentPhotoIndex = 0;
+let galleryPhotos = [];
 
 function openPhoto(img){
   galleryPhotos = Array.from(document.querySelectorAll(".gallery-grid img"));
@@ -871,25 +868,16 @@ document.addEventListener("keydown", function(e){
 </a>
         </div>
 
-<div class="photo-gallery">
+        <div class="photo-gallery">
 
 <h3>Обзор</h3>
 
 <div class="gallery-grid">
 
-<img src="assets/club1.jpg" onclick="openPhoto(this)">
-<img src="assets/club2.jpg" onclick="openPhoto(this)">
-<img src="assets/club3.jpg" onclick="openPhoto(this)">
-<img src="assets/club4.jpg" onclick="openPhoto(this)">
-
-<img class="hidden-gallery-photo" src="assets/club5.jpg" onclick="openPhoto(this)">
-<img class="hidden-gallery-photo" src="assets/club6.jpg" onclick="openPhoto(this)">
-<img class="hidden-gallery-photo" src="assets/club7.jpg" onclick="openPhoto(this)">
-<img class="hidden-gallery-photo" src="assets/club8.jpg" onclick="openPhoto(this)">
-<img class="hidden-gallery-photo" src="assets/club9.jpg" onclick="openPhoto(this)">
-<img class="hidden-gallery-photo" src="assets/club10.jpg" onclick="openPhoto(this)">
-<img class="hidden-gallery-photo" src="assets/club11.jpg" onclick="openPhoto(this)">
-<img class="hidden-gallery-photo" src="assets/club12.jpg" onclick="openPhoto(this)">
+<img src="assets/club1.jpg" onclick="openPhoto(0)">
+<img src="assets/club2.jpg" onclick="openPhoto(1)">
+<img src="assets/club3.jpg" onclick="openPhoto(2)">
+<img src="assets/club4.jpg" onclick="openPhoto(3)">
 
 </div>
 
